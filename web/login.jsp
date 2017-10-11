@@ -18,7 +18,7 @@
             <form action="Login" method="post">
                 Username :   <input type="text" name="usern" value="${us.getUsername()}"><br>
                 Password :   <input type="password" name="passw"><br>
-                Remember Me<input type="checkbox" name="reme" value="copy"><br>
+                Remember Me<input type="checkbox" name="reme" ${checked}><br>
                 <input type="submit" value="Login">
             </form>
         </div>

@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Home Page</h1>
-        <h3>Hello ${us.getUsername()}</h3>
-        <a href ="?message=You have successfully loged out!" >Log out</a>
+        <h3>Hello ${username}</h3>
+        <a href ="Login?action=logout" >Log out</a>
     </body>
 </html>
