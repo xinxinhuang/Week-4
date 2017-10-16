@@ -79,6 +79,8 @@ public class LoginServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
             return;
         }  
+
+        /*Setting up cookie*/
         if(request.getParameter("reme") == null)
         {
             Cookie[] cookies = request.getCookies();
@@ -98,6 +100,8 @@ public class LoginServlet extends HttpServlet {
             newcookie.setPath("/");
             response.addCookie(newcookie);     
         }
+        
+        /**session generated**/        
         HttpSession session = request.getSession();
         session.setAttribute("usern", user);
         response.sendRedirect("/home.jsp");
