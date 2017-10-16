@@ -29,24 +29,29 @@ public class LoginServlet extends HttpServlet {
         
         Cookie[] cookies = request.getCookies();
         
-        for(Cookie cookie : cookies)
+        if(cookies!=null)
         {
-            if(cookie.getName().equals("userIdCookie"))
+            for(Cookie cookie : cookies)
             {
-                request.setAttribute("usern", cookie.getValue());
-                request.setAttribute("checked", "checked");
+                if(cookie.getName().equals("userIdCookie"))
+                {
+                    request.setAttribute("usern", cookie.getValue());
+                    request.setAttribute("checked", "checked");
+                }
             }
         }
         if((formaction!=null)&& formaction.equals("logout")){
-            session.removeAttribute("username");
+            session.removeAttribute("usern");
             request.setAttribute("message", "User have logout successfully.");
             getServletContext().getRequestDispatcher("/login.jsp").forward(request,response);
            
         }
-        else if(session.getAttribute("username")!=null)
+        else if(session.getAttribute("usern")!=null)
         {
             response.sendRedirect("Home");
+            return;
         }
+        
         getServletContext().getRequestDispatcher("/login.jsp").forward(request,response);
         
     }
@@ -88,13 +93,13 @@ public class LoginServlet extends HttpServlet {
             }
         }
         else {
-            Cookie newcookie = new Cookie("userIdCookie", user);
+            Cookie newcookie = new Cookie("userIdCookie", request.getParameter("usern"));
             newcookie.setMaxAge(60*60*24*30);
             newcookie.setPath("/");
             response.addCookie(newcookie);     
         }
         HttpSession session = request.getSession();
-        session.setAttribute("username", user);
+        session.setAttribute("usern", user);
         response.sendRedirect("/home.jsp");
     }
 

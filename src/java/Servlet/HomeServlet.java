@@ -22,10 +22,13 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
-        if(session.getAttribute("usern")==null)
+        
+        if(session.getAttribute("usern")== null)
         {
-            response.sendRedirect("Login");
+            request.setAttribute("message", "*User Login required.");
+            getServletContext().getRequestDispatcher("/login.jsp").forward(request,response);
         }
         else
         {
